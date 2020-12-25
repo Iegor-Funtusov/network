@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form id="logoutAdminForm" method="POST" th:action="@{/admin/logout}">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
+    <nav class="nav nav-pills nav-fill mt-2">
+        <a class="nav-item nav-link" th:href="@{/admin}">Dashboard</a>
+        <a class="nav-item nav-link" onclick="document.forms['logoutAdminForm'].submit()" style="cursor: pointer !important;">Logout</a>
+    </nav>
+
+    <div class="row">
+        <div class="col">
+            <div th:if="${message}" class="alert alert-primary" role="alert">
+                <span th:text="${message}">message text</span>
+            </div>
+            <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                <span th:text="${errorMessage}">message text</span>
+            </div>
+            <div th:if="${warnMessage}" class="alert alert-dark" role="alert">
+                <span th:text="${warnMessage}">message text</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div layout:fragment="admin_content"></div>
+    </div>
+
+</div>
+</body>
+</html>
